@@ -1,0 +1,39 @@
+Create Item:
+POST /api/auctions/{id}/items
+
+JSON body:
+{"lot_identifier":"1","name":"Blessing Bid (Test)","description":"","start_amount":"","reserve_amount":"","quantity":"1","seller_id":""}
+
+Requires Rails Session Cookie and CSRF cookie. These appear to be refreshed constantly--I haven't been able to make any API calls from Postman when copying in cookies because they seem to update too fast. It doesn't seem like non-sanctioned external API use is really possible. However, we can still make API calls from the client itself :)
+
+Example request JSON:
+{"lot_identifier":"5000","name":"Blessing Bid – 50","description":"","start_amount":"","reserve_amount":"","quantity":"1","seller_id":""}
+
+Example 
+
+------------------------
+
+Sell Item:
+
+POST /api/bids/place_final
+
+JSON body:
+{"item_id":24057206,"amount":50,"user_id":3568991,"finish_status":"sold"}
+
+fetch(`/api/bids/place_final`, {
+  method: "POST",
+    "item_id": 24057206,
+    "amount": 50,
+    "user_id": 3568991,
+    "finish_status": "sold"
+  })
+})
+
+------------------------
+
+Fetch user ID (in this case from paddle number)
+
+GET /api/auctions/{auctionId}/bidders?query={paddleNum}&clerk_quick_search=true
+
+Example response:
+{"bidders":[{"id":3568991,"company_id":587,"registration_id":38066376,"account_id":3747565,"first_name":"Bryce","last_name":"Yoder","organization_name":null,"tax_id":null,"tax_rate_id":null,"tax_rate_label":null,"name":"Bryce Yoder","email":"","notes":null,"phone_number":"","location":{"id":3555660,"street":"","city":"","state":"","zip":"","county":null,"country":"US","cartesian_x":,"cartesian_y":,"lat":"","lng":""},"approved":true,"approved_for_online":true,"blocked":false,"accepted_terms":true,"live":true,"pending":false,"completed":true,"bidder_number":null,"paddle_number":10000,"driver_license":null,"online_paddle_number":10000,"live_paddle_number":149,"paddle_numbers":[149,10000],"created_at":"2026-04-18T22:01:20.000Z","updated_at":"2026-04-18T22:01:20.000Z"}],"bidders_user_ids":[3568991]}

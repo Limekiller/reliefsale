@@ -32,6 +32,8 @@ const main = async (data, auctionId) => {
             lot += 1
         }
     }
+
+    window.location.reload()
 }
 
 /**
