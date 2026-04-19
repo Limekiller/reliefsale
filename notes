@@ -45,3 +45,10 @@ Pain points:
 - Easily seeing which items went to which paddles. Why is this so hard in the interface? There's a big spreadsheet you can download for this but you have to dig through to find it and confirm the correct columns. We could just make this one button in the extension to easily get to this.
 - Why is it so hard to get to specific parts of the UI? Why is "Live Clerking Panel" sometimes not present in the sidebar? Why is the normal clerking panel (/clerk/ vs /live_clerk/) not in the sidebar with the rest of the pages? Should build easy links in the extension to go to the different interfaces for a given auction. Paste in the auction ID or something and then click the button maybe?
 - How do you see which items haven't been sold in the admin panel? Why would they not have a filter for that??
+
+-----------------------
+
+Inventory report (CSV with every item and who bought them, including paddle number):
+https://pareliefsale.bidwrangler.com/api/auctions/{auctionId}/inventory_summary.csv?fields=lot_identifier,name,buyer_name,buyer_email,sale_status,price,paddle_number,title_required,item_shipment_status
+
+Could just put a hard link to this with an auction selector in the extension
