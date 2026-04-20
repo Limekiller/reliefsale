@@ -117,6 +117,18 @@ const fetchAuctions = async (itemId, amount, userId) => {
     return result
 }
 
+/**
+ * Fetch items for a given auction
+ * 
+ * @param {int} auctionId The ID of the auction to fetch the item for
+ * @returns {obj} The JSON response object
+ */
+const fetchItemsFromAuction = async (auctionId) => {
+    let result = await fetch(`https://pareliefsale.bidwrangler.com/api/auctions/${auctionId}/items`)
+    result = await result.json()
+    return result
+}
+
 const functions = {
     addBlessingBids: addBlessingBids,
     addItem: addItem,

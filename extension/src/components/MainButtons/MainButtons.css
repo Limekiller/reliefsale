@@ -1,0 +1,9 @@
+.MainButtons {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 0.5rem;
+
+    button {
+        width: 100%;
+    }
+}

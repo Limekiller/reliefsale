@@ -1,0 +1,50 @@
+* {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+html {
+    background-color: #efeee9;
+    width: 30rem;
+    min-width: 30rem;
+}
+
+body {
+    margin: 0;
+    padding: 1rem;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+select, input {
+    border: 2px solid #c7c7c7;
+    background: #eeeeee;
+    padding: 10px;
+    transition: 0.2s;
+    border-radius: 0.25rem;
+}
+
+select:hover,
+input:hover {
+    background: #dddddd;
+}
+
+button, .button {
+    padding: 1rem;
+    border-radius: 0.25rem;
+    background-color: rgb(43, 51, 161);
+    color: white;
+    border: none;
+    transition: 0.2s;
+    font-size: 0.75rem;
+    text-decoration: none;
+}
+
+button:hover,
+.button:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+}

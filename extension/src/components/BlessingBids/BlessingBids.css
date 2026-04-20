@@ -1,0 +1,22 @@
+.BlessingBids {
+    
+    .bidForm {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .addTier {
+            background-color: transparent;
+            padding: 0.25rem;
+            color: unset;
+            border: 2px solid #c7c7c7;
+        }
+    }
+
+    button {
+        width: 100%;
+        background-color: rgb(37, 88, 37);
+    }
+
+}
