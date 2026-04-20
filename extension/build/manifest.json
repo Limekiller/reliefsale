@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "Relief Sale HQ",
+    "version": "0.0.1",
+    "description": "Admin control panel for the PA Relief Sale",
+    "action": {
+        "default_popup": "index.html"
+    },
+    "permissions": [],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
