@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import { FunctionContext } from './context'
@@ -10,7 +10,7 @@ function App() {
     const [auctions, setAuctions] = useState([])
     const [activeAuctionId, setActiveAuctionId] = useState(0)
 
-    const callContentFunction = (name, args, callback) => {
+    const callContentFunction = (name, args) => {
         return new Promise((resolve, reject) => {
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
                 chrome.tabs.sendMessage(tabs[0].id, { action: name, args: args }, (response) => {
@@ -25,17 +25,22 @@ function App() {
     }
 
     const init = async () => {
-        const response = await callContentFunction('fetchAuctions', [])
-        if (response.auctions) {
-            setAuctions(response.auctions)
+        try {
+            const response = await callContentFunction('fetchAuctions', [])
+            if (response.auctions) {
+                setAuctions(response.auctions)
+            }
+        } catch (error) {
+            console.error(error)
         }
+        setLoading(false)
     }
 
-    if (auctions.length === 0) {
+    useEffect(() => {
         init()
-    }
+    }, [])
 
-    return <FunctionContext.Provider functions={{callContentFunction: callContentFunction}}>
+    return <FunctionContext value={{callContentFunction: callContentFunction}}>
         {auctions.length > 0 ?
             <select
                 value={activeAuctionId}
@@ -57,7 +62,7 @@ function App() {
                 <BlessingBids />
             </>
         : ""}
-    </FunctionContext.Provider>
+    </FunctionContext>
 }
 
 export default App

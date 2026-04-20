@@ -124,6 +124,7 @@ const fetchAuctions = async (itemId, amount, userId) => {
  * @returns {obj} The JSON response object
  */
 const fetchItemsFromAuction = async (auctionId) => {
+    console.log(auctionId)
     let result = await fetch(`https://pareliefsale.bidwrangler.com/api/auctions/${auctionId}/items`)
     result = await result.json()
     return result
@@ -134,7 +135,8 @@ const functions = {
     addItem: addItem,
     getUserIdFromPaddle: getUserIdFromPaddle,
     sellItem: sellItem,
-    fetchAuctions: fetchAuctions
+    fetchAuctions: fetchAuctions,
+    fetchItemsFromAuction: fetchItemsFromAuction
 }
 
 console.log('Content script loaded');
@@ -142,6 +144,7 @@ console.log('Content script loaded');
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     try {
         const response = functions[request.action](...request.args)
+        console.log('ga', response)
         sendResponse(response)
         return true
     } catch (error) {

@@ -8,25 +8,34 @@ let nextId = 0
 function BlessingBids({ auctionId }) {
     const [active, setActive] = useState(false)
     const [bidData, setBidData] = useState([
-        {amount: 500, paddles: [1, 2, 3]}
+        {id: '6rdyfevik', amount: 500, paddles: []}
     ])
 
-    const updateBidData = (i, amount, paddles) => {
-        const updatedArray = bidData.map((item, index) => {
-            if (index === i) {
-                return { amount: amount, paddles: paddles }
+    const getKey = () => {
+        return (Math.random() + 1).toString(36).substring(3)
+    }
+
+    const updateBidData = (id, amount, paddles) => {
+        const updatedArray = bidData.map(tier => {
+            if (tier.id === id) {
+                return { id: id, amount: amount, paddles: paddles }
             }
-            return item
+            return tier
         })
         setBidData(updatedArray)
     }
 
+    const removeTier = id => {
+        setBidData(bidData => bidData.filter(tier => tier.id !== id))
+    }
+
     const addTier = () => {
         setBidData([...bidData, {
-            amount: bidData.slice(-1)[0].amount - 50,
+            id: getKey(),
+            amount: bidData.length > 0 ? bidData.slice(-1)[0].amount - 50 : 500,
             paddles: []
         }])
-    }
+    }   
 
     return <div className='BlessingBids'>
         <button onClick={() => setActive(!active)}>
@@ -36,11 +45,12 @@ function BlessingBids({ auctionId }) {
             <div className='bidForm'>
                 {bidData.map((tier, i) => {
                     return <Bid 
+                        key={tier.id}
+                        id={tier.id}
                         amount={tier.amount} 
                         paddles={tier.paddles} 
-                        index={i}
                         updateBidData={updateBidData}
-                        key={i} 
+                        removeTier={removeTier}
                     />
                 })}
                 <button class="addTier" onClick={addTier}>Add tier</button>

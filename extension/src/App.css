@@ -25,11 +25,10 @@ select, input {
     padding: 10px;
     transition: 0.2s;
     border-radius: 0.25rem;
-}
 
-select:hover,
-input:hover {
-    background: #dddddd;
+    &:hover {
+        background: #dddddd;
+    }
 }
 
 button, .button {
@@ -41,10 +40,16 @@ button, .button {
     transition: 0.2s;
     font-size: 0.75rem;
     text-decoration: none;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(0.9);
+    }
 }
 
-button:hover,
-.button:hover {
-    cursor: pointer;
-    filter: brightness(0.9);
+button.disabled,
+.button.disabled {
+    filter: saturate(0.5);
+    opacity: 0.75;
+    pointer-events: none;
 }
