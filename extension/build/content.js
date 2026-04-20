@@ -11,8 +11,8 @@
  */
 const addBlessingBids = async (data, auctionId) => {
     let lot = 5000
-    for (const key in data) {
-        for (const paddle of data[key]) {
+    for (const tier of data) {
+        for (const paddle of tier.paddles) {
             // Attempt to fetch the user ID for the paddle number in this auction
             let userId
             try {
@@ -22,18 +22,18 @@ const addBlessingBids = async (data, auctionId) => {
                 continue
             }
 
-            const itemData = await addItem(auctionId, key, lot)
+            const itemData = await addItem(auctionId, tier.amount, lot)
             if (!itemData.id) {
                 console.error("Failed to add item for some reason")
                 continue
             }
 
-            await sellItem(itemData.id, key, userId)
+            await sellItem(itemData.id, tier.amount, userId)
             lot += 1
         }
     }
 
-    window.location.reload()
+    window.location.href = `https://pareliefsale.bidwrangler.com/ui/live_clerk/${auctionId}`
 }
 
 /**

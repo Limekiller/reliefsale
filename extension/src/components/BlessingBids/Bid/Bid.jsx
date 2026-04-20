@@ -15,6 +15,12 @@ function Bid({
         removeTier(id)
     }
 
+    const updatePaddles = e => {
+        const cleanedVal = e.target.value.replace(/[^0-9,]/g, '')
+        setCurrPaddles(cleanedVal.split(','))
+        e.target.value = cleanedVal
+    }
+
     useEffect(() => {
         updateBidData(id, currAmount, currPaddles)
     }, [currAmount, currPaddles])
@@ -31,7 +37,7 @@ function Bid({
         <input
             type='text'
             defaultValue={currPaddles.join(', ')}
-            onKeyUp={e => setCurrPaddles(e.target.value.trim().split(','))}
+            onKeyUp={updatePaddles}
             placeholder="1, 59, 134, 345"
         />
         <button onClick={remove} className="remove">

@@ -11,6 +11,8 @@ html {
 body {
     margin: 0;
     padding: 1rem;
+    width: 30rem;
+    min-width: 30rem;
 }
 
 #root {
@@ -49,7 +51,7 @@ button, .button {
 
 button.disabled,
 .button.disabled {
-    filter: saturate(0.5);
+    filter: saturate(0.25);
     opacity: 0.75;
     pointer-events: none;
 }

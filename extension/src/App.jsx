@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, act } from 'react'
 import './App.css'
 
 import { FunctionContext } from './context'
@@ -41,6 +41,8 @@ function App() {
     }, [])
 
     return <FunctionContext value={{callContentFunction: callContentFunction}}>
+        <img src="/img/parslogo.png" alt="PA Relief Sale logo" style={{width: '10rem', margin: '0 auto'}} />
+
         {auctions.length > 0 ?
             <select
                 value={activeAuctionId}
@@ -59,7 +61,7 @@ function App() {
 
         {activeAuctionId ? <>
                 <MainButtons auctionId={activeAuctionId} />
-                <BlessingBids />
+                <BlessingBids auctionId={activeAuctionId} />
             </>
         : ""}
     </FunctionContext>
